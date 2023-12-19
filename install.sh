@@ -16,8 +16,8 @@ read dbPassword
 hashedPwd="php /var/www/html/password.php -pwd=$dbPassword"
 printf "\033[0;32m> Password hash recieved.\033[0m \n"
 
-cd /var/www/html/key
-echo "$dbPassword" > .key
+
+echo "$dbPassword" > /mcloud.key
 printf "\033[0;32m> Key saved successfully.\033[0m \n"
 
 printf "\033[0;32m> Restarting Apache2.\033[0m \n"
