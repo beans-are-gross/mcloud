@@ -4,9 +4,10 @@ ini_set("display_errors", 1);
 
 require './conn.php';
 
-$internalDir = mysqli_real_escape_string($conn, $_GET['dir']);
-$accountCookie = $_COOKIE['pwd'];
-$uri = $_SERVER['REQUEST_URI'];
+if (!empty($accountCookie = $_COOKIE['pwd'])){
+    $internalDir = mysqli_real_escape_string($conn, $_GET['dir']);
+    $uri = $_SERVER['REQUEST_URI'];
+}
 
 if (!isset($_COOKIE['pwd']) && $uri !== "/index.php") {
     header("Location: /index.php");
