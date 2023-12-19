@@ -5,8 +5,8 @@ fi
 
 clear
 
-printf "\033[0;32m> Updating apt and intalling required files.\033[0m \n"
-sudo apt update && sudo apt install php libapache2-mod-php php-mysql apache2 mysql-server curl -y -qq
+printf "\033[0;32m> Updating apt and intalling required files.\033[0m \n\n"
+sudo apt update && sudo apt install php libapache2-mod-php php-mysql apache2 mysql-server curl -y
 
 clear
 
