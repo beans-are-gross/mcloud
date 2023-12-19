@@ -20,8 +20,8 @@ cd /var/www/html/key
 echo "$dbPassword" > .key
 printf "\033[0;32m> Key saved successfully.\033[0m \n"
 
-printf "\033[0;32m> Starting Apache2.\033[0m \n"
-sudo systemctl start mysql.service
+printf "\033[0;32m> Restarting Apache2.\033[0m \n"
+sudo systemctl restart apache2.service
 
 printf "\033[0;32m> Starting MySQL.\033[0m \n"
 sudo systemctl start mysql.service

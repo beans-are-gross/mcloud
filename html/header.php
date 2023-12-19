@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_STRICT);
+ini_set("display_errors", 1);
+
 require './conn.php';
 
 $internalDir = mysqli_real_escape_string($conn, $_GET['dir']);
