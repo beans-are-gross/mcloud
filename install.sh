@@ -15,7 +15,9 @@ rm -r /var/www/html
 mv html /var/www
 
 printf "\033[0;34m? What would you like your admin password to be?\033[0m \n"
+printf "\033[0;31m! Spaces will be removed!\033[0m \n"
 read dbPassword
+dbPassword = echo $string | tr -d " "
 hashedPwd="php /var/www/html/password.php -pwd=$dbPassword"
 printf "\033[0;32m> Password hash recieved.\033[0m \n"
 

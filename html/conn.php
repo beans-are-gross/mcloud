@@ -1,6 +1,11 @@
 <?php
-$conn = mysqli_connect("127.0.0.1", "mcloud", file_get_contents("/mcloud.key"), "mcloud");
+$host = "127.0.0.1";
+$username = "mcloud";
+$password = file_get_contents("/mcloud.key");
+$database = "mcloud";
 
-if(mysqli_connect_errno()){
-    die("Failed to connect to the database.<br>".mysqli_connect_error());
+$conn = mysqli_connect($host, $username, $password, $database);
+
+if(!$conn){
+    die("Failed to connect to the database. More info: " . mysqli_connect_error());
 }
