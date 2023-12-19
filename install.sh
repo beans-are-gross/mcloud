@@ -5,7 +5,7 @@ fi
 
 clear
 
-printf "\033[0;32m> Updating apt and intalling required files.\033[0m \n\n"
+printf "\033[0;32m> Updating apt and intalling required files.\033[0m \n"
 sudo apt update && sudo apt install php libapache2-mod-php php-mysql apache2 mysql-server curl -y
 
 clear
@@ -16,10 +16,10 @@ mv html /var/www
 
 printf "\033[0;34m? What would you like your admin password to be?\033[0m \n"
 printf "\033[0;31m! Spaces will be removed!\033[0m \n"
-printf "\032[0;31m> \033[0m"
+printf "> "
 read dbPassword
-dbPassword = echo $dbPassword | tr -d "\n"
-dbPassword = echo $dbPassword | tr -d " "
+dbPassword=$(echo $dbPassword | tr -d "\n")
+dbPassword=$(echo $dbPassword | tr -d " ")
 hashedPwd="php /var/www/html/password.php -pwd=$dbPassword"
 printf "\033[0;32m> Password hash recieved.\033[0m \n"
 
