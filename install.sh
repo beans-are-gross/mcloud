@@ -30,7 +30,8 @@ printf "\033[0;32m> Please ignore the upcoming password errors.\033[0m \n"
 mysql --user="root" --execute="ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '$dbPassword';"
 mysql --user="root" --password="$dbPassword" --execute="CREATE USER 'mcloud'@'%' IDENTIFIED WITH mysql_native_password BY '$dbPassword';"
 mysql --user="root" --password="$dbPassword" --execute="CREATE DATABASE mcloud;"
-mysql --user="root" --password="$dbPassword" --execute="GRANT SELECT, INSERT, UPDATE, DELETE ON mcloud TO 'mcloud'@'%';"
+mysql --user="root" --password="$dbPassword" --database="mcloud" --execute="GRANT SELECT, INSERT, UPDATE, DELETE ON files TO 'mcloud'@'%';"
+mysql --user="root" --password="$dbPassword" --database="mcloud" --execute="GRANT SELECT, INSERT, UPDATE, DELETE ON login TO 'mcloud'@'%';"
 mysql --user="root" --password="$dbPassword" --execute="FLUSH PRIVILEGES;"
 mysql --user="root" --password="$dbPassword" --database="mcloud" --execute='CREATE TABLE files (
     `id` INT NOT NULL AUTO_INCREMENT,
