@@ -1,7 +1,7 @@
 <?php
 $host = "127.0.0.1";
 $username = "mcloud";
-$password = trim(file_get_contents("/mcloud.key"), " ");
+$password = trim(file_get_contents("/mcloud.key"), " \n");
 $database = "mcloud";
 
 $conn = mysqli_connect($host, $username, $password, $database);
