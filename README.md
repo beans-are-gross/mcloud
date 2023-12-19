@@ -6,9 +6,6 @@ A self hosted storage system.
 
 ```
 sudo apt update && sudo apt install git -y
-```
-### Then:
-```
 git clone https://github.com/beans-are-gross/mcloud.git
 cd mcloud
 sudo bash install.sh
