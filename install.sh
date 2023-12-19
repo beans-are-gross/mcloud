@@ -3,9 +3,12 @@ if [ "$(id -u)" != "0" ]; then
    exit 1
 fi
 
+clear
 
 printf "\033[0;32m> Updating apt and intalling required files.\033[0m \n"
 sudo apt update -y && sudo apt install php libapache2-mod-php php-mysql apache2 mysql-server curl -y
+
+clear
 
 printf "\033[0;32m> Moving html folder to /var/www.\033[0m \n"
 rm -r /var/www/html
@@ -50,5 +53,6 @@ mysql --user="root" --password="$dbPassword" --database="mcloud" --execute='CREA
 );'
 mysql --user="root" --password="$dbPassword" --database="mcloud" --execute="INSERT INTO login (uid, pwd, firstName, lastName) VALUES ('admin', '$hashedPWD', 'Admin', 'User');"
 
+clear
 
 printf "\033[0;35m> Setup complete! \033[0m \n"
