@@ -10,3 +10,12 @@ git clone https://github.com/beans-are-gross/mcloud.git
 cd mcloud
 sudo bash install.sh
 ```
+
+## Update instructions:
+
+```
+rm -r mcloud
+git clone https://github.com/beans-are-gross/mcloud.git
+cd mcloud
+sudo bash update.sh
+```
