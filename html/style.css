@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+body{
+    font-family: 'Roboto', sans-serif;
+    color: black;
+    background-color: #F8F8FF;
+
+/*     background-image: url("/background.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed; */
+
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+}
+
+header{
+    width: 100vw;
+}
+
+header .material-symbols-rounded{
+    padding-right: 10px;
+}
+
+button{
+    border: none;
+    background: none;
+}
+
+#login-button{
+    background-color: #29aae1;
+    color: white;
+    border-radius: 100px;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+#login{
+    background-color: #F8F8FF;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    
+    padding: .5em;
+    width: max-content;
+    border-radius: 5px;
+}
+
+#login button{
+    color: black;
+}
+
+#login-inputs{
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+#login #login-inputs input{
+    font-size: 300%;
+    border: none;
+    border-radius: inherit;
+}
+
+#login #login-inputs input:focus{
+    outline: none;
+    background-color: #F8F8FF;
+}
+
+#divider{
+    margin: 50px;
+    padding: 2px;
+    background-color: rgba(128,128,128,.3);
+    border-radius: 5px;
+}
+
+#center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#space-between{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#drives{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#drive-info{
+    background-color: #F8F8FF;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    
+    padding: .5em;
+    width: max-content;
+    border-radius: 5px;
+}
+
+#upload{
+    background-color: rgba(0,0,0,.5);
+    
+    padding: .5em;
+    width: max-content;
+    height: max-content;
+    border-radius: 5px;
+    text-align: center;
+}
+
+#upload-buttons{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#files-list{
+    background-color: #F8F8FF;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    
+    padding: .5em;
+    margin: 1em;
+    width: 90vw;
+    height: max-content;
+    border-radius: 5px;
+    text-align: center;
+}
+
+#file{
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+
+    border-bottom: rgba(128,128,128,.3) solid 1px;
+    padding: 5px;
+}
+
+#file .material-symbols-rounded{
+    padding-right: 10px;
+}
+
+#view-file-popup{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,.7);
+    background-attachment: fixed;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#view-file{
+    color: white;
+    margin: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#view-file button{
+    color: white;
+}
+
+#view-file input{
+    font-size: 2em;
+    max-width: 400px;
+    width: max-content;
+}
+
+#view-file-embed{
+    background-color: white;
+    border-radius: 5px;
+}
