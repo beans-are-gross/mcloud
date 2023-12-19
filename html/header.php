@@ -9,9 +9,6 @@ if (!empty($accountCookie = $_COOKIE['pwd'])){
     $uri = $_SERVER['REQUEST_URI'];
 }
 
-if (!isset($_COOKIE['pwd']) && $uri !== "/index.php") {
-    header("Location: /index.php");
-}
 function displayError($error)
 {
     echo "<p style='color: red;'>$error</p>";
