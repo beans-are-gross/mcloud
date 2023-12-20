@@ -21,8 +21,6 @@ if (isset($_COOKIE['pwd'])){
         $internalDir = mysqli_real_escape_string($conn, $_GET['dir']);
         $uri = $_SERVER['REQUEST_URI'];
     }
-} else {
-    require './home.php';
 }
 
 function displayError($error)
