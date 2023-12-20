@@ -56,7 +56,9 @@ function displayError($error)
                 const mode = document.getElementById("mode");
                 mode.addEventListener("change", function() {
                     var color = localStorage.getItem("mode") == undefined ? mode.value : localStorage.getItem("mode");
-                    
+
+                    console.info("Changing theme to: " + color);
+
                     if(mode == "light"){
                         lightMode();
                     } else if(mode == "dark"){
