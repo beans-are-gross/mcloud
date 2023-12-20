@@ -192,8 +192,8 @@ if (empty($internalDir)) {
                         </form>
                     </div>
                 </header>
-                <div id='center' style='width: 100%; height: 100%;'>
-                    <embed src='/file.php?id=$fileId' id='view-file-embed'>
+                <div id='center'>
+                    <embed src='/file.php?id=$fileId' id='view-file-embed' style='width: 90%; height: 80%;'>
                 </div>
             </div>
             ";
@@ -259,8 +259,8 @@ if (empty($internalDir)) {
                         </form>
                     </div>
                 </header>
-                <div id='center' style='width: 100%; height: 100%;'>
-                    <embed src='/file.php?id=$fileId' id='view-file-embed'>
+                <div id='center'>
+                    <embed src='/file.php?id=$fileId' id='view-file-embed' style='width: 90%; height: 80%;'>
                 </div>
             </div>
             ";
