@@ -18,7 +18,6 @@ if (isset($_COOKIE['pwd'])){
     } else {
         echo "<script>alert('security passed');</script>";
         $accountCookie = $_COOKIE['pwd'];
-        $internalDir = mysqli_real_escape_string($conn, $_GET['dir']);
         $uri = $_SERVER['REQUEST_URI'];
     }
 }

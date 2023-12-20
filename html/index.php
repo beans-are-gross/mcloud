@@ -9,6 +9,8 @@ if (isset($_POST['login-button']) || isset($_POST['login-submit'])) {
     exit;
 }
 
+$internalDir = mysqli_real_escape_string($conn, $_GET['dir']);
+
 if (empty($internalDir)) {
     header("Location: /?dir=/");
 }
