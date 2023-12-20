@@ -83,7 +83,8 @@ if (empty($internalDir)) {
                         $internalFileName = uniqid("", true) . ".$fileExt";
                         $fileDestination = "/mcloud/uploads/$internalFileName";
                         if(!move_uploaded_file($fileTmp, $fileDestination)){
-                            displayError("Failed to transfer the file. (500)");
+                            displayError("Failed to transfer the file. (500)" . error_get_last()["message"]);
+                            exit;
                         }
                         $sql = "INSERT INTO files (name, internalDir, externalDir, type, icon, accountCookie) VALUES(?, ?, ?, ?, ?, ?);";
                         $stmt = mysqli_stmt_init($conn);

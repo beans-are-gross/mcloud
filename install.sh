@@ -25,6 +25,7 @@ printf "\033[0;32m> Password hash recieved.\033[0m \n"
 printf "\033[0;32m> Creating mCloud root folder.\033[0m \n"
 mkdir /mcloud
 mkdir /mcloud/uploads
+chmod 777 /mcloud/uploads
 
 echo "$dbPassword" > /mcloud/mcloud.key
 printf "\033[0;32m> Key saved successfully.\033[0m \n"
