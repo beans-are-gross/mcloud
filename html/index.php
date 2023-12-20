@@ -247,7 +247,7 @@ if (empty($internalDir)) {
                         </button>
                         <form method='post'>
                             <div id='center'>
-                                <h1><input name='new-file-name' value='$fileName'></h1>
+                                <h2><input name='new-file-name' value='$fileName'></h2>
                                 <button name='submit-edit-file-name' value='$fileId'>
                                     <span class='material-symbols-rounded'>
                                         edit
