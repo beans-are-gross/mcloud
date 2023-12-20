@@ -47,8 +47,6 @@ if (empty($internalDir)) {
             <?php
             if (isset($_POST['file-submit'])) {
                 $file = $_FILES['file-upload'];
-                $fileNameExploded = explode(".", $fileName);
-                $fileExt = strtolower(end($fileNameExploded));
 
                 if ($file == null) {
                     displayError("No file found. Please try again");
@@ -58,6 +56,9 @@ if (empty($internalDir)) {
                     $fileError = $file['error'];
                     $fileType = $file['type'];
                     $fileIcon = explode("/", $fileType)[0];
+
+                    $fileNameExploded = explode(".", $fileName);
+                    $fileExt = strtolower(end($fileNameExploded));
 
                     if ($fileIcon == "text") {
                         $icon = "description";
@@ -85,7 +86,7 @@ if (empty($internalDir)) {
                         $sql = "INSERT INTO files (name, internalDir, externalDir, type, icon, accountCookie) VALUES(?, ?, ?, ?, ?, ?);";
                         $stmt = mysqli_stmt_init($conn);
                         mysqli_stmt_prepare($stmt, $sql);
-                        mysqli_stmt_bind_param($stmt, "sssss", $fileName, $internalDir, $fileDestination, $fileType, $icon, $accountCookie);
+                        mysqli_stmt_bind_param($stmt, "ssssss", $fileName, $internalDir, $fileDestination, $fileType, $icon, $accountCookie);
                         mysqli_stmt_execute($stmt);
                         mysqli_stmt_close($stmt);
                     }
