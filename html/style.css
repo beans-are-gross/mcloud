@@ -175,4 +175,9 @@ button{
 #view-file-embed{
     background-color: white;
     border-radius: 5px;
+
+    width: max-content;
+    height: max-content;
+    max-width: 90%;
+    max-height: 90%;
 }

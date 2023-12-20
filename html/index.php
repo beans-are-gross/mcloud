@@ -163,7 +163,7 @@ if (empty($internalDir)) {
             ";
     }
 
-    function showFile($fileName, $fileId, $imgWidth, $imgHeight){
+    function showFile($fileName, $fileId){
         echo "
             <div id='view-file-popup'>
                 <header>
@@ -193,7 +193,7 @@ if (empty($internalDir)) {
                     </div>
                 </header>
                 <div id='center'>
-                    <embed src='/file.php?id=$fileId' id='view-file-embed' width='$imgWidth' height='$imgHeight'>
+                    <embed src='/file.php?id=$fileId' id='view-file-embed'>
                 </div>
             </div>
             ";
@@ -231,11 +231,6 @@ if (empty($internalDir)) {
         if (empty($externalDir)) {
             fileNotFound();
         } else {
-            list($imgWidth, $imgHeight) = getimagesize($externalDir);
-            if (empty($imgWidth) || empty($imgHeight)) {
-                $imgWidth = "90%";
-                $imgHeight = "90%";
-            }
             echo "
             <div id='view-file-popup'>
                 <header>
@@ -265,7 +260,7 @@ if (empty($internalDir)) {
                     </div>
                 </header>
                 <div id='center'>
-                    <embed src='/file.php?id=$fileId' id='view-file-embed' width='$imgWidth' height='$imgHeight'>
+                    <embed src='/file.php?id=$fileId' id='view-file-embed'>
                 </div>
             </div>
             ";
@@ -290,12 +285,7 @@ if (empty($internalDir)) {
         if (empty($externalDir)) {
             fileNotFound();
         } else {
-            list($imgWidth, $imgHeight) = getimagesize($externalDir);
-            if (empty($imgWidth) || empty($imgHeight)) {
-                $imgWidth = "90%";
-                $imgHeight = "90%";
-            }
-            showFile($fileName, $fileId, $imgWidth, $imgHeight);
+            showFile($fileName, $fileId);
         }
     }
     ?>
