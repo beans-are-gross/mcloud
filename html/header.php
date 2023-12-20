@@ -4,7 +4,7 @@ ini_set("display_errors", 1);
 
 require './conn.php';
 
-if (!isset($_COOKIE['pwd'])){
+if (isset($_COOKIE['pwd'])){
     $accountCookie = $_COOKIE['pwd'];
     $internalDir = mysqli_real_escape_string($conn, $_GET['dir']);
     $uri = $_SERVER['REQUEST_URI'];

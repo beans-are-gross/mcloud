@@ -1,2 +1,2 @@
 <?php
-echo password_hash($_GET["pwd"], PASSWORD_BCRYPT);
+echo password_hash($argv[1], PASSWORD_BCRYPT);

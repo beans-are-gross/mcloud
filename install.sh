@@ -19,7 +19,7 @@ printf "\033[0;31m! Spaces will be removed!\033[0m \n"
 printf "> "
 read dbPassword
 dbPassword=$(echo -n $dbPassword | tr -d '\n')
-hashedPwd=$(php /var/www/html/password.php -pwd=$dbPassword)
+hashedPwd=$(php /var/www/html/password.php $dbPassword)
 printf "\033[0;32m> Password hash recieved.\033[0m \n"
 
 printf "\033[0;32m> Creating mCloud root folder.\033[0m \n"
