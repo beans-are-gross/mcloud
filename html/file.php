@@ -13,9 +13,11 @@ mysqli_stmt_fetch($stmt);
 mysqli_stmt_close($stmt);
 
 if(empty($externalDir)){
-    echo "File not found";
+    echo "Error: File not found";
     http_response_code(404);
 } else {
     header("Content-type: " . $type);
-    readfile($externalDir);
+    if(!readfile($externalDir)){
+        echo "Error: File not found";
+    }
 }
