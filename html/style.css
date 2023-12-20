@@ -178,3 +178,7 @@ button{
     max-width: 90%;
     max-height: 90%;
 }
+
+#mode {
+    padding-left: 1em;
+}

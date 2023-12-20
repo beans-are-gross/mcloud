@@ -49,8 +49,8 @@ function displayError($error)
             </span>
             <h3>mCloud</h3>
             <select id="mode">
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
+                <option value="light" id="light">Light</option>
+                <option value="dark" id="dark">Dark</option>
             </select>
             <script>
                 function lightMode() {
@@ -58,6 +58,8 @@ function displayError($error)
                     document.body.style.color = "black";
 
                     localStorage.setItem("mode", "light");
+
+                    document.getElementById("light").selected = true;
                 }
 
                 function darkMode() {
@@ -65,6 +67,8 @@ function displayError($error)
                     document.body.style.color = "white";
 
                     localStorage.setItem("mode", "dark");
+
+                    document.getElementById("dark").selected = true;
                 }
 
                 var color = localStorage.getItem("mode");
