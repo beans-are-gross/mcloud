@@ -193,7 +193,7 @@ if (empty($internalDir)) {
                     </div>
                 </header>
                 <div id='center'>
-                    <embed src='/file.php?id=$fileId' id='view-file-embed' style='width: 90%; height: 80%;'>
+                    <embed src='/file.php?id=$fileId' id='view-file-embed' style='width: 90vw; height: 80vh;'>
                 </div>
             </div>
             ";
