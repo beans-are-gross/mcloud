@@ -55,8 +55,23 @@ if (empty($internalDir)) {
                     $fileTmp = $file['tmp_name'];
                     $fileError = $file['error'];
                     $fileType = $file['type'];
-                    $fileType = explode("/", $fileType);
-                    $fileType = $fileType[0];
+                    $fileIcon = explode("/", $fileType)[0];
+
+                    if ($fileIcon == "text") {
+                        $icon = "description";
+                    } else if ($fileIcon == "image") {
+                        $icon = "image";
+                    } else if ($fileIcon == "video") {
+                        $icon = "movie";
+                    } else if ($fileIcon == "audio") {
+                        $icon = "music_note";
+                    } else if (end($fileExternalDirExploded) == "pdf") {
+                        $icon = "picture_as_pdf";
+                    } else if (end($fileExternalDirExploded) == "exe") {
+                        $icon = "desktop_windows";
+                    } else {
+                        $icon = "unknown_document";
+                    }
 
                     $fileNameExploded = explode(".", $fileName);
                     $fileExt = strtolower(end($fileNameExploded));
@@ -66,12 +81,12 @@ if (empty($internalDir)) {
                         displayError("An unknown error occured while uploading your file.");
                     } else {
                         $internalFileName = uniqid("", true) . ".$fileExt";
-                        $fileDestination = "./uploads/$internalFileName";
+                        $fileDestination = "/mcloud/uploads/$internalFileName";
                         move_uploaded_file($fileTmp, $fileDestination);
-                        $sql = "INSERT INTO files (name, internalDir, externalDir, type, accountCookie) VALUES(?, ?, ?, ?, ?);";
+                        $sql = "INSERT INTO files (name, internalDir, externalDir, type, icon, accountCookie) VALUES(?, ?, ?, ?, ?, ?);";
                         $stmt = mysqli_stmt_init($conn);
                         mysqli_stmt_prepare($stmt, $sql);
-                        mysqli_stmt_bind_param($stmt, "sssss", $fileName, $internalDir, $fileDestination, $fileType, $accountCookie);
+                        mysqli_stmt_bind_param($stmt, "sssss", $fileName, $internalDir, $fileDestination, $fileType, $icon, $accountCookie);
                         mysqli_stmt_execute($stmt);
                         mysqli_stmt_close($stmt);
                     }
@@ -101,21 +116,7 @@ if (empty($internalDir)) {
                 while (mysqli_stmt_fetch($stmt)) {
                     $fileExternalDirExploded = explode(".", $fileExternalDir);
                     echo "<button name='view' value='$fileId' id='file'><span class='material-symbols-rounded'>";
-                    if ($fileType == "text") {
-                        echo "description";
-                    } else if ($fileType == "image") {
-                        echo "image";
-                    } else if ($fileType == "video") {
-                        echo "movie";
-                    } else if ($fileType == "audio") {
-                        echo "music_note";
-                    } else if (end($fileExternalDirExploded) == "pdf") {
-                        echo "picture_as_pdf";
-                    } else if (end($fileExternalDirExploded) == "exe") {
-                        echo "desktop_windows";
-                    } else {
-                        echo "unknown_document";
-                    }
+//
                     echo "</span>$fileName</button>";
                 }
                 mysqli_stmt_close($stmt);

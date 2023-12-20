@@ -22,8 +22,11 @@ dbPassword=$(echo -n $dbPassword | tr -d '\n')
 hashedPwd=$(php /var/www/html/password.php -pwd=$dbPassword)
 printf "\033[0;32m> Password hash recieved.\033[0m \n"
 
+printf "\033[0;32m> Creating mCloud root folder.\033[0m \n"
+mkdir /mcloud
+mkdir /mcloud/uploads
 
-echo "$dbPassword" > /mcloud.key
+echo "$dbPassword" > /mcloud/mcloud.key
 printf "\033[0;32m> Key saved successfully.\033[0m \n"
 
 
@@ -41,6 +44,7 @@ mysql --user="root" --password="$dbPassword" --database="mcloud" --execute='CREA
     `dateAdded` DATETIME NOT NULL DEFAULT NOW(),
     `lastUpdated` DATETIME NOT NULL DEFAULT NOW() ON UPDATE NOW(),
     `type` TEXT NOT NULL,
+    `icon` TEXT NOT NULL,
     `accountCookie` TEXT NOT NULL,
     PRIMARY KEY (`id`)
 );'
