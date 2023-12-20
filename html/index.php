@@ -47,6 +47,8 @@ if (empty($internalDir)) {
             <?php
             if (isset($_POST['file-submit'])) {
                 $file = $_FILES['file-upload'];
+                $fileNameExploded = explode(".", $fileName);
+                $fileExt = strtolower(end($fileNameExploded));
 
                 if ($file == null) {
                     displayError("No file found. Please try again");
@@ -65,16 +67,13 @@ if (empty($internalDir)) {
                         $icon = "movie";
                     } else if ($fileIcon == "audio") {
                         $icon = "music_note";
-                    } else if (end($fileExternalDirExploded) == "pdf") {
+                    } else if ($fileExt == "pdf") {
                         $icon = "picture_as_pdf";
-                    } else if (end($fileExternalDirExploded) == "exe") {
+                    } else if ($fileExt == "exe") {
                         $icon = "desktop_windows";
                     } else {
                         $icon = "unknown_document";
                     }
-
-                    $fileNameExploded = explode(".", $fileName);
-                    $fileExt = strtolower(end($fileNameExploded));
 
 
                     if (!$fileError === 1) {
@@ -107,17 +106,14 @@ if (empty($internalDir)) {
         <div id="files-list">
             <form method="get">
                 <?php
-                $sql = "SELECT id, name, externalDir, dateAdded, type FROM files WHERE accountCookie=? AND internalDir=? ORDER BY dateAdded DESC;";
+                $sql = "SELECT id, name, externalDir, dateAdded, icon FROM files WHERE accountCookie=? AND internalDir=? ORDER BY dateAdded DESC;";
                 $stmt = mysqli_stmt_init($conn);
                 mysqli_stmt_prepare($stmt, $sql);
                 mysqli_stmt_bind_param($stmt, "ss", $accountCookie, $internalDir);
                 mysqli_stmt_execute($stmt);
-                mysqli_stmt_bind_result($stmt, $fileId, $fileName, $fileExternalDir, $fileDateAdded, $fileType);
+                mysqli_stmt_bind_result($stmt, $fileId, $fileName, $fileExternalDir, $fileDateAdded, $icon);
                 while (mysqli_stmt_fetch($stmt)) {
-                    $fileExternalDirExploded = explode(".", $fileExternalDir);
-                    echo "<button name='view' value='$fileId' id='file'><span class='material-symbols-rounded'>";
-//
-                    echo "</span>$fileName</button>";
+                    echo "<button name='view' value='$fileId' id='file'><span class='material-symbols-rounded'>$icon</span>$fileName</button>";
                 }
                 mysqli_stmt_close($stmt);
                 $sql = "SELECT COUNT(name) FROM files WHERE accountCookie=? AND internalDir=?;";
