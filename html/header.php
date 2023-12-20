@@ -13,6 +13,7 @@ if (isset($_COOKIE['pwd'])){
     mysqli_stmt_bind_result($stmt, $id);
     if(empty($id)){
         setcookie("pwd", "", time() - 3600, $path = "", $domain = "", $secure = false);
+        echo "<script>alert('security failed');</script>";
         header("Location: /");
     } else {
         echo "<script>alert('security passed');</script>";
