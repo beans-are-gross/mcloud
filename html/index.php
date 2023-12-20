@@ -19,7 +19,7 @@ if (empty($internalDir)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drive info | mCloud</title>
+    <title>mCloud</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
@@ -257,7 +257,7 @@ if (empty($internalDir)) {
         if (empty($externalDir)) {
             fileNotFound();
         } else {
-            list($imgWidth, $imgHeight) = getimagesize($externalDir);
+            list($imgWidth, $imgHeight) = getimagesize("/file.php?id=$fileId");
             if (empty($imgWidth) || empty($imgHeight)) {
                 $imgWidth = "90%";
                 $imgHeight = "600px";
