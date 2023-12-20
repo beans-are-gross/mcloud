@@ -234,9 +234,41 @@ if (empty($internalDir)) {
             list($imgWidth, $imgHeight) = getimagesize($externalDir);
             if (empty($imgWidth) || empty($imgHeight)) {
                 $imgWidth = "90%";
-                $imgHeight = "600px";
+                $imgHeight = "90%";
             }
-            showFile($fileName, $fileId, $imgWidth, $imgHeight);
+            echo "
+            <div id='view-file-popup'>
+                <header>
+                    <div id='view-file'>
+                        <button type='button' name='back' onclick='window.location.href=`index.php`;'>
+                            <span class='material-symbols-rounded' style='font-size: 40px;'>
+                                arrow_back
+                            </span>
+                        </button>
+                        <form method='post'>
+                            <div id='center'>
+                                <h1><input name='new-file-name' value='$fileName'></h1>
+                                <button name='submit-edit-file-name' value='$fileId'>
+                                    <span class='material-symbols-rounded'>
+                                        edit
+                                    </span>
+                                </button>
+                            </div>
+                        </form>
+                        <form method='post'>
+                            <button type='submit' name='deleteFile' value='$fileId'>
+                                <span class='material-symbols-rounded' style='font-size: 40px;'>
+                                    delete
+                                </span>
+                            </button>
+                        </form>
+                    </div>
+                </header>
+                <div id='center'>
+                    <embed src='/file.php?id=$fileId' id='view-file-embed' width='$imgWidth' height='$imgHeight'>
+                </div>
+            </div>
+            ";
         }
     } else if (isset($_POST['submit-edit-file-name'])) {
         $sql = "UPDATE files SET name=? WHERE accountCookie=? AND id=?;";
@@ -258,10 +290,10 @@ if (empty($internalDir)) {
         if (empty($externalDir)) {
             fileNotFound();
         } else {
-            list($imgWidth, $imgHeight) = getimagesize("/file.php?id=$fileId");
+            list($imgWidth, $imgHeight) = getimagesize($externalDir);
             if (empty($imgWidth) || empty($imgHeight)) {
                 $imgWidth = "90%";
-                $imgHeight = "600px";
+                $imgHeight = "90%";
             }
             showFile($fileName, $fileId, $imgWidth, $imgHeight);
         }
