@@ -23,7 +23,6 @@ if (isset($_COOKIE['pwd'])){
     }
 } else {
     require './home.php';
-    exit;
 }
 
 function displayError($error)
