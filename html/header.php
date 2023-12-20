@@ -4,7 +4,7 @@ ini_set("display_errors", 1);
 
 require './conn.php';
 
-if (isset($_COOKIE['pwd'])){
+if (isset($_COOKIE['pwd'])) {
     $sql = "SELECT id FROM login WHERE pwd=?;";
     $stmt = mysqli_stmt_init($conn);
     mysqli_stmt_prepare($stmt, $sql);
@@ -13,7 +13,7 @@ if (isset($_COOKIE['pwd'])){
     mysqli_stmt_bind_result($stmt, $id);
     mysqli_stmt_fetch($stmt);
     mysqli_stmt_close($stmt);
-    if(empty($id)){
+    if (empty($id)) {
         setcookie("pwd", "", time() - 3600, $path = "", $domain = "", $secure = false);
         header("Location: /?bad-cookie");
     } else {
@@ -53,30 +53,38 @@ function displayError($error)
                 <option value="dark">Dark</option>
             </select>
             <script>
+                function lightMode() {
+                    document.body.style.backgroundColor = "#F8F8FF";
+                    document.body.style.color = "black";
+
+                    localStorage.setItem("mode", "light");
+                }
+
+                function darkMode() {
+                    document.body.style.backgroundColor = "#121212";
+                    document.body.style.color = "white";
+
+                    localStorage.setItem("mode", "dark");
+                }
+
+                var color = localStorage.getItem("mode");
+
+                if (color == "light") {
+                    lightMode();
+                } else if (color == "dark") {
+                    darkMode();
+                }
+
                 const mode = document.getElementById("mode");
-                mode.addEventListener("change", function() {
-                    var color = localStorage.getItem("mode") == undefined ? mode.value : localStorage.getItem("mode");
+                mode.addEventListener("change", function () {
+                    var color = mode.value;
 
                     console.info("Changing theme to: " + color);
 
-                    if(mode == "light"){
+                    if (color == "light") {
                         lightMode();
-                    } else if(mode == "dark"){
+                    } else if (color == "dark") {
                         darkMode();
-                    }
-
-                    function lightMode(){
-                        document.body.style.backgroundColor = "#F8F8FF";
-                        document.body.style.color = "black";
-
-                        localStorage.setItem("mode", "light");
-                    }
-
-                    function darkMode(){
-                        document.body.style.backgroundColor = "#121212";
-                        document.body.style.color = "white";
-                        
-                        localStorage.setItem("mode", "light");
                     }
                 });
             </script>
