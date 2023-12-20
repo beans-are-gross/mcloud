@@ -192,7 +192,7 @@ if (empty($internalDir)) {
                         </form>
                     </div>
                 </header>
-                <div id='center'>
+                <div id='center' style='width: 100%; height: 100%;'>
                     <embed src='/file.php?id=$fileId' id='view-file-embed'>
                 </div>
             </div>
@@ -259,7 +259,7 @@ if (empty($internalDir)) {
                         </form>
                     </div>
                 </header>
-                <div id='center'>
+                <div id='center' style='width: 100%; height: 100%;'>
                     <embed src='/file.php?id=$fileId' id='view-file-embed'>
                 </div>
             </div>
