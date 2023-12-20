@@ -61,7 +61,7 @@ function displayError($error)
                 }
 
                 function darkMode() {
-                    document.body.style.backgroundColor = "#121212";
+                    document.body.style.backgroundColor = "#343434";
                     document.body.style.color = "white";
 
                     localStorage.setItem("mode", "dark");

@@ -47,7 +47,7 @@ button{
 }
 
 #login button{
-    color: black;
+    color: inherit;
 }
 
 #login-inputs{
@@ -118,6 +118,7 @@ button{
 
 #files-list{
     background-color: inherit;
+    color: inherit;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     
     padding: .5em;
@@ -173,7 +174,7 @@ button{
 }
 
 #view-file-embed{
-    background-color: white;
+    background-color: inherit;
     border-radius: 5px;
 
     width: max-content;
