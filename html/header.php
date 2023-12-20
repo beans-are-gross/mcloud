@@ -48,6 +48,36 @@ function displayError($error)
                 cloud
             </span>
             <h3>mCloud</h3>
+            <select id="mode">
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+            </select>
+            <script>
+                const mode = document.getElementById("mode");
+                mode.addEventListener("change", function() {
+                    var color = localStorage.getItem("mode") == undefined ? mode.value : localStorage.getItem("mode");
+                    
+                    if(mode == "light"){
+                        lightMode();
+                    } else if(mode == "dark"){
+                        darkMode();
+                    }
+
+                    function lightMode(){
+                        document.body.style.backgroundColor = "#F8F8FF";
+                        document.body.style.color = "black";
+
+                        localStorage.setItem("mode", "light");
+                    }
+
+                    function darkMode(){
+                        document.body.style.backgroundColor = "#121212";
+                        document.body.style.color = "white";
+                        
+                        localStorage.setItem("mode", "light");
+                    }
+                });
+            </script>
         </div>
     </header>
 </body>

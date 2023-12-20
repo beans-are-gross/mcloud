@@ -38,7 +38,7 @@ button{
 }
 
 #login{
-    background-color: #F8F8FF;
+    background-color: inherit;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     
     padding: .5em;
@@ -63,7 +63,7 @@ button{
 
 #login #login-inputs input:focus{
     outline: none;
-    background-color: #F8F8FF;
+    background-color: inherit;
 }
 
 #divider{
@@ -92,7 +92,7 @@ button{
 }
 
 #drive-info{
-    background-color: #F8F8FF;
+    background-color: inherit;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     
     padding: .5em;
@@ -117,7 +117,7 @@ button{
 }
 
 #files-list{
-    background-color: #F8F8FF;
+    background-color: inherit;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     
     padding: .5em;
