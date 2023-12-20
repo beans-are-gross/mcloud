@@ -1,4 +1,5 @@
 <?php
+require "./conn.php";
 $sql = "SELECT externalDir, type FROM files WHERE accountCookie=? AND id=?;";
 $stmt = mysqli_stmt_init($conn);
 mysqli_stmt_prepare($stmt, $sql);
