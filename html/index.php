@@ -82,7 +82,7 @@ if (empty($internalDir)) {
                         $internalFileName = uniqid("", true) . ".$fileExt";
                         $fileDestination = "/mcloud/uploads/$internalFileName";
                         if(!move_uploaded_file($fileTmp, $fileDestination)){
-                            displayError("Failed to transfer the file.<br>This error is common with Firefox security settings.");
+                            displayError("Failed to transfer the file.<br>This error is common with Firefox.");
                             exit;
                         }
                         $sql = "INSERT INTO files (name, internalDir, externalDir, type, icon, accountCookie) VALUES(?, ?, ?, ?, ?, ?);";
