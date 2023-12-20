@@ -13,7 +13,7 @@ if (isset($_COOKIE['pwd'])){
     mysqli_stmt_bind_result($stmt, $id);
     if(empty($id)){
         setcookie("pwd", "", time() - 3600, $path = "", $domain = "", $secure = false);
-        header("Location: /");
+        header("Location: /".$id);
     } else {
         $accountCookie = $_COOKIE['pwd'];
         $internalDir = mysqli_real_escape_string($conn, $_GET['dir']);
