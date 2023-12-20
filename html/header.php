@@ -5,9 +5,20 @@ ini_set("display_errors", 1);
 require './conn.php';
 
 if (isset($_COOKIE['pwd'])){
-    $accountCookie = $_COOKIE['pwd'];
-    $internalDir = mysqli_real_escape_string($conn, $_GET['dir']);
-    $uri = $_SERVER['REQUEST_URI'];
+    $sql = "SELECT id FROM login WHERE pwd=?;";
+    $stmt = mysqli_stmt_init($conn);
+    mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_bind_param($stmt, "s", $_COOKIE['pwd']);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_bind_result($stmt, $id);
+    if(empty($id)){
+        setcookie("pwd", "", time() - 3600, $path = "", $domain = "", $secure = false);
+        header("Location: /");
+    } else {
+        $accountCookie = $_COOKIE['pwd'];
+        $internalDir = mysqli_real_escape_string($conn, $_GET['dir']);
+        $uri = $_SERVER['REQUEST_URI'];
+    }
 }
 
 function displayError($error)
