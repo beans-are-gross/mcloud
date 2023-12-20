@@ -33,7 +33,7 @@
                                 displayError("Failed to set session cookie. (500)");
                                 exit;
                             } else {
-                                header("Location: ./index.php");
+                                header("Location: /");
                             }
                         }
                     } else {
