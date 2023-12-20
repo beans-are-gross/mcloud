@@ -76,25 +76,13 @@ if (empty($internalDir)) {
                         $icon = "unknown_document";
                     }
 
-                    list($imgWidth, $imgHeight) = getimagesize($fileTmp);
-                    echo "
-                    <div id='view-file-popup'>
-                    <header>
-                    <h1>Uploading this file:</h1>
-                    </header>
-                    <div id='center'>
-                    <embed src='$fileTmp' id='view-file-embed' width='$imgWidth' height='$imgHeight'>
-                    </div>
-                    ";
-
-
                     if (!$fileError === 1) {
                         displayError("An unknown error occured while uploading your file.");
                     } else {
                         $internalFileName = uniqid("", true) . ".$fileExt";
                         $fileDestination = "/mcloud/uploads/$internalFileName";
                         if(!move_uploaded_file($fileTmp, $fileDestination)){
-                            displayError("Failed to transfer the file. (500)");
+                            displayError("Failed to transfer the file.<br>This error is common with Firefox security settings.");
                             exit;
                         }
                         $sql = "INSERT INTO files (name, internalDir, externalDir, type, icon, accountCookie) VALUES(?, ?, ?, ?, ?, ?);";
@@ -104,7 +92,6 @@ if (empty($internalDir)) {
                         mysqli_stmt_execute($stmt);
                         mysqli_stmt_close($stmt);
                     }
-                    echo "</div>";
                 }
             }
             ?>
