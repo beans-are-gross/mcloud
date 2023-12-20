@@ -135,6 +135,68 @@ if (empty($internalDir)) {
     </div>
 
     <?php
+    function fileNotFound()
+    {
+        echo "
+            <div id='view-file-popup'>
+                <header>
+                    <div id='view-file'>
+                        <button type='button' name='back' onclick='window.location.href=`index.php`;'>
+                            <span class='material-symbols-rounded' style='font-size: 40px;'>
+                                arrow_back
+                            </span>
+                        </button>
+                        <h1>Error</h1>
+                    </div>
+                </header>
+                <div id='center'>
+                    <div style='text-align: center; color: white;'>
+                        <span class='material-symbols-rounded' style='font-size: 500px;'>
+                            error
+                        </span>
+                        <h1>This file does not exist (404)</h1>
+                    </div>
+                </div>
+            </div>
+            ";
+    }
+
+    function showFile($fileName, $fileId, $imgWidth, $imgHeight){
+        echo "
+            <div id='view-file-popup'>
+                <header>
+                    <div id='view-file'>
+                        <button type='button' name='back' onclick='window.location.href=`index.php`;'>
+                            <span class='material-symbols-rounded' style='font-size: 40px;'>
+                                arrow_back
+                            </span>
+                        </button>
+                        <form method='post'>
+                            <div id='center'>
+                                <h1>$fileName</h1>
+                                <button name='edit-file-name' value='$fileId'>
+                                    <span class='material-symbols-rounded'>
+                                        edit
+                                    </span>
+                                </button>
+                            </div>
+                        </form>
+                        <form method='post'>
+                            <button type='submit' name='deleteFile' value='$fileId'>
+                                <span class='material-symbols-rounded' style='font-size: 40px;'>
+                                    delete
+                                </span>
+                            </button>
+                        </form>
+                    </div>
+                </header>
+                <div id='center'>
+                    <embed src='/file.php?id=$fileId' id='view-file-embed' width='$imgWidth' height='$imgHeight'>
+                </div>
+            </div>
+            ";
+    }
+
     if (isset($_POST['deleteFile'])) {
         $sql = "SELECT externalDir FROM files WHERE accountCookie=? AND id=?;";
         $stmt = mysqli_stmt_init($conn);
@@ -165,67 +227,15 @@ if (empty($internalDir)) {
         mysqli_stmt_fetch($stmt);
         mysqli_stmt_close($stmt);
         if (empty($externalDir)) {
-            echo "
-            <div id='view-file-popup'>
-                <header>
-                    <div id='view-file'>
-                        <button type='button' name='back' onclick='window.location.href=`index.php`;'>
-                            <span class='material-symbols-rounded' style='font-size: 40px;'>
-                                arrow_back
-                            </span>
-                        </button>
-                        <h1>Error</h1>
-                    </div>
-                </header>
-                <div id='center'>
-                    <div style='text-align: center; color: white;'>
-                        <span class='material-symbols-rounded' style='font-size: 500px;'>
-                            error
-                        </span>
-                        <h1>This file does not exist (404)</h1>
-                    </div>
-                </div>
-            </div>
-            ";
+            fileNotFound();
         } else {
-            list($imgWidth, $imgHeight) = getimagesize($externalDir);
+            $url =
+                    list($imgWidth, $imgHeight) = getimagesize($externalDir);
             if (empty($imgWidth) || empty($imgHeight)) {
                 $imgWidth = "90%";
                 $imgHeight = "600px";
             }
-            echo "
-            <div id='view-file-popup'>
-                <header>
-                    <div id='view-file'>
-                        <button type='button' name='back' onclick='window.location.href=`index.php`;'>
-                            <span class='material-symbols-rounded' style='font-size: 40px;'>
-                                arrow_back
-                            </span>
-                        </button>
-                        <form method='post'>
-                            <div id='center'>
-                                <input type='text' name='new-file-name' value='$fileName' required >
-                                <button type='submit' name='submit-edit-file-name' value='$fileId'>
-                                    <span class='material-symbols-rounded'>
-                                        edit
-                                    </span>
-                                </button>
-                            </div>
-                        </form>
-                        <form method='post'>
-                            <button type='submit' name='deleteFile' value='$fileId'>
-                                <span class='material-symbols-rounded' style='font-size: 40px;'>
-                                    delete
-                                </span>
-                            </button>
-                        </form>
-                    </div>
-                </header>
-                <div id='center'>
-                    <embed src='$externalDir' id='view-file-embed' width='$imgWidth' height='$imgHeight'>
-                </div>
-            </div>
-            ";
+            showFile($fileName, $fileId, $imgWidth, $imgHeight);
         }
     } else if (isset($_POST['submit-edit-file-name'])) {
         $sql = "UPDATE files SET name=? WHERE accountCookie=? AND id=?;";
@@ -245,67 +255,14 @@ if (empty($internalDir)) {
         mysqli_stmt_fetch($stmt);
         mysqli_stmt_close($stmt);
         if (empty($externalDir)) {
-            echo "
-            <div id='view-file-popup'>
-                <header>
-                    <div id='view-file'>
-                        <button type='button' name='back' onclick='window.location.href=`index.php`;'>
-                            <span class='material-symbols-rounded' style='font-size: 40px;'>
-                                arrow_back
-                            </span>
-                        </button>
-                        <h1>Error</h1>
-                    </div>
-                </header>
-                <div id='center'>
-                    <div style='text-align: center; color: white;'>
-                        <span class='material-symbols-rounded' style='font-size: 500px;'>
-                            error
-                        </span>
-                        <h1>This file does not exist (404)</h1>
-                    </div>
-                </div>
-            </div>
-            ";
+            fileNotFound();
         } else {
             list($imgWidth, $imgHeight) = getimagesize($externalDir);
             if (empty($imgWidth) || empty($imgHeight)) {
                 $imgWidth = "90%";
                 $imgHeight = "600px";
             }
-            echo "
-            <div id='view-file-popup'>
-                <header>
-                    <div id='view-file'>
-                        <button type='button' name='back' onclick='window.location.href=`index.php`;'>
-                            <span class='material-symbols-rounded' style='font-size: 40px;'>
-                                arrow_back
-                            </span>
-                        </button>
-                        <form method='post'>
-                            <div id='center'>
-                                <h1>$fileName</h1>
-                                <button name='edit-file-name' value='$fileId'>
-                                    <span class='material-symbols-rounded'>
-                                        edit
-                                    </span>
-                                </button>
-                            </div>
-                        </form>
-                        <form method='post'>
-                            <button type='submit' name='deleteFile' value='$fileId'>
-                                <span class='material-symbols-rounded' style='font-size: 40px;'>
-                                    delete
-                                </span>
-                            </button>
-                        </form>
-                    </div>
-                </header>
-                <div id='center'>
-                    <embed src='$externalDir' id='view-file-embed' width='$imgWidth' height='$imgHeight'>
-                </div>
-            </div>
-            ";
+            showFile($fileName, $fileId, $imgWidth, $imgHeight);
         }
     }
     ?>
