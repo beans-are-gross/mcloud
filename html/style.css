@@ -135,6 +135,8 @@ button{
 
     width: 100%;
 
+    color: inherit;
+
     border-bottom: rgba(128,128,128,.3) solid 1px;
     padding: 5px;
 }
