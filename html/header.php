@@ -11,12 +11,12 @@ if (isset($_COOKIE['pwd'])){
     mysqli_stmt_bind_param($stmt, "s", $_COOKIE['pwd']);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_bind_result($stmt, $id);
+    mysqli_stmt_fetch($stmt);
+    mysqli_stmt_close($stmt);
     if(empty($id)){
         setcookie("pwd", "", time() - 3600, $path = "", $domain = "", $secure = false);
-        echo "<script>alert('security failed, $id');</script>";
-        //header("Location: /");
+        header("Location: /?bad-cookie");
     } else {
-        echo "<script>alert('security passed');</script>";
         $accountCookie = $_COOKIE['pwd'];
         $uri = $_SERVER['REQUEST_URI'];
     }
