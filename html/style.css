@@ -100,20 +100,14 @@ button{
     border-radius: 5px;
 }
 
-#upload{
-    background-color: rgba(0,0,0,.5);
-    
-    padding: .5em;
-    width: max-content;
-    height: max-content;
-    border-radius: 5px;
-    text-align: center;
-}
-
 #upload-buttons{
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+#upload-buttons button{
+    color: inherit;
 }
 
 #files-list{
