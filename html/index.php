@@ -185,7 +185,12 @@ if (empty($internalDir)) {
                                 </button>
                             </div>
                         </form>
-                        <form method='post'>
+                        <form method='post'>                            
+                            <button type='button' onclick='window.open(`/file.php?id=$fileId`);'>
+                                <span class='material-symbols-rounded' style='font-size: 40px;'>
+                                    download
+                                </span>
+                            </button>
                             <button type='submit' name='deleteFile' value='$fileId'>
                                 <span class='material-symbols-rounded' style='font-size: 40px;'>
                                     delete
