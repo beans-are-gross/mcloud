@@ -25,7 +25,6 @@
                     mysqli_stmt_bind_param($stmt, "s", $uid);
                     mysqli_stmt_execute($stmt);
                     mysqli_stmt_bind_result($stmt, $pwdSql, $idSql);
-                    mysqli_stmt_close($stmt);
                     if (mysqli_stmt_fetch($stmt)) {
                         if (!password_verify($pwd, $pwdSql)) {
                             displayError("Incorrect username or password.");
@@ -41,6 +40,7 @@
                                 displayError("Failed to set session cookie. (500)");
                                 exit;
                             } else {
+                                mysqli_stmt_close($stmt);
                                 $sql = "UPDATE login SET cookie=? WHERE id=?;";
                                 mysqli_stmt_prepare($stmt, $sql);
                                 mysqli_stmt_bind_param($stmt, "s", $newCookie, $idSql);
