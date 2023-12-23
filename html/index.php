@@ -87,10 +87,10 @@ if (empty($internalDir)) {
                             displayError("Failed to transfer the file.<br>This error is common with Firefox.");
                             exit;
                         }
-                        $sql = "INSERT INTO files (name, internalDir, externalDir, type, icon, accountCookie) VALUES(?, ?, ?, ?, ?, ?);";
+                        $sql = "INSERT INTO files (name, internalDir, externalDir, type, icon, userId) VALUES(?, ?, ?, ?, ?, ?, ?);";
                         $stmt = mysqli_stmt_init($conn);
                         mysqli_stmt_prepare($stmt, $sql);
-                        mysqli_stmt_bind_param($stmt, "ssssss", $fileName, $internalDir, $fileDestination, $fileType, $icon, $accountCookie);
+                        mysqli_stmt_bind_param($stmt, "sssssss", $fileName, $internalDir, $fileDestination, $fileType, $icon, $userId);
                         mysqli_stmt_execute($stmt);
                         mysqli_stmt_close($stmt);
                     }
@@ -111,20 +111,20 @@ if (empty($internalDir)) {
         <div id="files-list">
             <form method="get">
                 <?php
-                $sql = "SELECT id, name, externalDir, dateAdded, icon FROM files WHERE accountCookie=? AND internalDir=? ORDER BY dateAdded DESC;";
+                $sql = "SELECT id, name, externalDir, dateAdded, icon FROM files WHERE userId=? AND internalDir=? ORDER BY dateAdded DESC;";
                 $stmt = mysqli_stmt_init($conn);
                 mysqli_stmt_prepare($stmt, $sql);
-                mysqli_stmt_bind_param($stmt, "ss", $accountCookie, $internalDir);
+                mysqli_stmt_bind_param($stmt, "ss", $userId, $internalDir);
                 mysqli_stmt_execute($stmt);
                 mysqli_stmt_bind_result($stmt, $fileId, $fileName, $fileExternalDir, $fileDateAdded, $icon);
                 while (mysqli_stmt_fetch($stmt)) {
                     echo "<button name='view' value='$fileId' id='file'><span class='material-symbols-rounded'>$icon</span>$fileName</button>";
                 }
                 mysqli_stmt_close($stmt);
-                $sql = "SELECT COUNT(name) FROM files WHERE accountCookie=? AND internalDir=?;";
+                $sql = "SELECT COUNT(name) FROM files WHERE userId=? AND internalDir=?;";
                 $stmt = mysqli_stmt_init($conn);
                 mysqli_stmt_prepare($stmt, $sql);
-                mysqli_stmt_bind_param($stmt, "ss", $accountCookie, $internalDir);
+                mysqli_stmt_bind_param($stmt, "ss", $userId, $internalDir);
                 mysqli_stmt_execute($stmt);
                 mysqli_stmt_bind_result($stmt, $totalFiles);
                 mysqli_stmt_fetch($stmt);
@@ -207,19 +207,19 @@ if (empty($internalDir)) {
     }
 
     if (isset($_POST['deleteFile'])) {
-        $sql = "SELECT externalDir FROM files WHERE accountCookie=? AND id=?;";
+        $sql = "SELECT externalDir FROM files WHERE userId=? AND id=?;";
         $stmt = mysqli_stmt_init($conn);
         mysqli_stmt_prepare($stmt, $sql);
-        mysqli_stmt_bind_param($stmt, "ss", $accountCookie, $_GET['view']);
+        mysqli_stmt_bind_param($stmt, "ss", $userId, $_GET['view']);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_bind_result($stmt, $externalDir);
         mysqli_stmt_fetch($stmt);
         mysqli_stmt_close($stmt);
 
-        $sql = "DELETE FROM files WHERE accountCookie=? AND id=?;";
+        $sql = "DELETE FROM files WHERE userId=? AND id=?;";
         $stmt = mysqli_stmt_init($conn);
         mysqli_stmt_prepare($stmt, $sql);
-        mysqli_stmt_bind_param($stmt, "ss", $accountCookie, $_GET['view']);
+        mysqli_stmt_bind_param($stmt, "ss", $userId, $_GET['view']);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
 
@@ -227,10 +227,10 @@ if (empty($internalDir)) {
 
         echo "<script>location.href='index.php';</script>";
     } else if (isset($_POST['edit-file-name'])) {
-        $sql = "SELECT id, name, externalDir FROM files WHERE accountCookie=? AND id=?;";
+        $sql = "SELECT id, name, externalDir FROM files WHERE userId=? AND id=?;";
         $stmt = mysqli_stmt_init($conn);
         mysqli_stmt_prepare($stmt, $sql);
-        mysqli_stmt_bind_param($stmt, "ss", $accountCookie, $_GET['view']);
+        mysqli_stmt_bind_param($stmt, "ss", $userId, $_GET['view']);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_bind_result($stmt, $fileId, $fileName, $externalDir);
         mysqli_stmt_fetch($stmt);
@@ -273,18 +273,18 @@ if (empty($internalDir)) {
             ";
         }
     } else if (isset($_POST['submit-edit-file-name'])) {
-        $sql = "UPDATE files SET name=? WHERE accountCookie=? AND id=?;";
+        $sql = "UPDATE files SET name=? WHERE userId=? AND id=?;";
         $stmt = mysqli_stmt_init($conn);
         mysqli_stmt_prepare($stmt, $sql);
-        mysqli_stmt_bind_param($stmt, "sss", $_POST['new-file-name'], $accountCookie, $_POST['submit-edit-file-name']);
+        mysqli_stmt_bind_param($stmt, "sss", $_POST['new-file-name'], $userId, $_POST['submit-edit-file-name']);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
         echo "<script>location.href='index.php';</script>";
     } else if (isset($_GET['view'])) {
-        $sql = "SELECT id, name, externalDir FROM files WHERE accountCookie=? AND id=?;";
+        $sql = "SELECT id, name, externalDir FROM files WHERE userId=? AND id=?;";
         $stmt = mysqli_stmt_init($conn);
         mysqli_stmt_prepare($stmt, $sql);
-        mysqli_stmt_bind_param($stmt, "ss", $accountCookie, $_GET['view']);
+        mysqli_stmt_bind_param($stmt, "ss", $userId, $_GET['view']);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_bind_result($stmt, $fileId, $fileName, $externalDir);
         mysqli_stmt_fetch($stmt);

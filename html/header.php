@@ -4,20 +4,20 @@ ini_set("display_errors", 1);
 
 require './conn.php';
 
-if (isset($_COOKIE['pwd'])) {
-    $sql = "SELECT id FROM login WHERE pwd=?;";
+if (isset($_COOKIE['userId'])) {
+    $sql = "SELECT id FROM login WHERE cookie=?;";
     $stmt = mysqli_stmt_init($conn);
     mysqli_stmt_prepare($stmt, $sql);
-    mysqli_stmt_bind_param($stmt, "s", $_COOKIE['pwd']);
+    mysqli_stmt_bind_param($stmt, "s", $_COOKIE['userId']);
     mysqli_stmt_execute($stmt);
-    mysqli_stmt_bind_result($stmt, $id);
+    mysqli_stmt_bind_result($stmt, $userId);
     mysqli_stmt_fetch($stmt);
     mysqli_stmt_close($stmt);
-    if (empty($id)) {
-        setcookie("pwd", "", time() - 3600, $path = "", $domain = "", $secure = false);
+    if (empty($userId)) {
+        setcookie("userId", "", time() - 3600, $path = "", $domain = "", $secure = false);
         header("Location: /?bad-cookie");
     } else {
-        $accountCookie = $_COOKIE['pwd'];
+        $userId = $_COOKIE['userId'];
         $uri = $_SERVER['REQUEST_URI'];
     }
 }

@@ -46,7 +46,7 @@ mysql --user="root" --password="$dbPassword" --database="mcloud" --execute='CREA
     `lastUpdated` DATETIME NOT NULL DEFAULT NOW() ON UPDATE NOW(),
     `type` TEXT NOT NULL,
     `icon` TEXT NOT NULL,
-    `accountCookie` TEXT NOT NULL,
+    `userId` TEXT NOT NULL,
     PRIMARY KEY (`id`)
 );'
 mysql --user="root" --password="$dbPassword" --database="mcloud" --execute='CREATE TABLE login (
@@ -55,6 +55,7 @@ mysql --user="root" --password="$dbPassword" --database="mcloud" --execute='CREA
     `pwd` VARCHAR(255) NOT NULL,
     `firstName` TEXT NOT NULL,
     `lastName` TEXT NOT NULL,
+    `cookie` VARCHAR(16) NOT NULL,
     PRIMARY KEY (`id`)
 );'
 mysql --user="root" --password="$dbPassword" --database="mcloud" --execute="INSERT INTO login (uid, pwd, firstName, lastName) VALUES ('admin', '$hashedPwd', 'Admin', 'User');"

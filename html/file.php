@@ -1,6 +1,14 @@
 <?php
 require "./conn.php";
-$sql = "SELECT name, externalDir, type FROM files WHERE accountCookie=? AND id=?;";
+$sql = "SELECT id FROM login WHERE cookie=?;";
+$stmt = mysqli_stmt_init($conn);
+mysqli_stmt_prepare($stmt, $sql);
+mysqli_stmt_bind_param($stmt, "s", $_COOKIE['userId']);
+mysqli_stmt_execute($stmt);
+mysqli_stmt_bind_result($stmt, $userId);
+mysqli_stmt_fetch($stmt);
+mysqli_stmt_close($stmt);
+$sql = "SELECT name, externalDir, type FROM files WHERE userId=? AND id=?;";
 $stmt = mysqli_stmt_init($conn);
 mysqli_stmt_prepare($stmt, $sql);
 mysqli_stmt_bind_param($stmt, "ss", $_COOKIE['pwd'], $_GET['id']);
@@ -17,6 +25,6 @@ if(empty($externalDir)){
     $fileExt = end(explode(".", $externalDir));
     header("Content-Disposition: inline;filename=$name.$fileExt");
     if(!readfile($externalDir)){
-        echo "Error: File not found";
+        echo "Error: File lost";
     }
 }

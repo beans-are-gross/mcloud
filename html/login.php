@@ -19,20 +19,33 @@
                     $uid = mysqli_real_escape_string($conn, $_POST['uid']);
                     $pwd = mysqli_real_escape_string($conn, $_POST['pwd']);
 
-                    $sql = "SELECT pwd FROM login WHERE uid=?;";
+                    $sql = "SELECT pwd, id FROM login WHERE uid=?;";
                     $stmt = mysqli_stmt_init($conn);
                     mysqli_stmt_prepare($stmt, $sql);
                     mysqli_stmt_bind_param($stmt, "s", $uid);
                     mysqli_stmt_execute($stmt);
-                    mysqli_stmt_bind_result($stmt, $pwdSql);
+                    mysqli_stmt_bind_result($stmt, $pwdSql, $idSql);
+                    mysqli_stmt_close($stmt);
                     if (mysqli_stmt_fetch($stmt)) {
                         if (!password_verify($pwd, $pwdSql)) {
                             displayError("Incorrect username or password.");
                         } else {
-                            if (!setcookie("pwd", $pwdSql, $expires_or_options = 0, $path = "", $domain = "", $secure = false)) {
+                            $characters = array_merge(range('a', 'z'), range('A', 'Z'), range(0, 9));
+                            $letterIndex = 0;
+                            $newCookie = "";
+                            while($letterIndex < 17){
+                                $newCookie .= strval($characters[array_rand($characters)]);
+                                $letterIndex ++;
+                            }
+                            if (!setcookie("userId", $newCookie, $expires_or_options = 0, $path = "", $domain = "", $secure = false)) {
                                 displayError("Failed to set session cookie. (500)");
                                 exit;
                             } else {
+                                $sql = "UPDATE login SET cookie=? WHERE id=?;";
+                                mysqli_stmt_prepare($stmt, $sql);
+                                mysqli_stmt_bind_param($stmt, "s", $newCookie, $idSql);
+                                mysqli_stmt_execute($stmt);
+                                mysqli_stmt_close($stmt);
                                 header("Location: /");
                             }
                         }
