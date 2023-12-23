@@ -19,12 +19,12 @@
                     $uid = mysqli_real_escape_string($conn, $_POST['uid']);
                     $pwd = mysqli_real_escape_string($conn, $_POST['pwd']);
 
-                    $sql = "SELECT pwd, id FROM login WHERE uid=?;";
+                    $sql = "SELECT id, pwd FROM login WHERE uid=?;";
                     $stmt = mysqli_stmt_init($conn);
                     mysqli_stmt_prepare($stmt, $sql);
                     mysqli_stmt_bind_param($stmt, "s", $uid);
                     mysqli_stmt_execute($stmt);
-                    mysqli_stmt_bind_result($stmt, $pwdSql, $idSql);
+                    mysqli_stmt_bind_result($stmt, $idSql, $pwdSql);
                     if (mysqli_stmt_fetch($stmt)) {
                         if (!password_verify($pwd, $pwdSql)) {
                             displayError("Incorrect username or password.");

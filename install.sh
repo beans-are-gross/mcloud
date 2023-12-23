@@ -58,7 +58,7 @@ mysql --user="root" --password="$dbPassword" --database="mcloud" --execute='CREA
     `cookie` VARCHAR(16) NOT NULL,
     PRIMARY KEY (`id`)
 );'
-mysql --user="root" --password="$dbPassword" --database="mcloud" --execute="INSERT INTO login (uid, pwd, firstName, lastName) VALUES ('admin', '$hashedPwd', 'Admin', 'User');"
+mysql --user="root" --password="$dbPassword" --database="mcloud" --execute="INSERT INTO login (uid, pwd, firstName, lastName, cookie) VALUES ('admin', '$hashedPwd', 'Admin', 'User', '');"
 mysql --user="root" --password="$dbPassword" --database="mcloud" --execute="GRANT SELECT, INSERT, UPDATE, DELETE ON mcloud.files TO 'mcloud'@'localhost';"
 mysql --user="root" --password="$dbPassword" --database="mcloud" --execute="GRANT SELECT, INSERT, UPDATE, DELETE ON mcloud.login TO 'mcloud'@'localhost';"
 mysql --user="root" --password="$dbPassword" --execute="FLUSH PRIVILEGES;"
