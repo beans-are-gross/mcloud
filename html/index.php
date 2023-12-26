@@ -14,6 +14,9 @@ $internalDir = mysqli_real_escape_string($conn, $_GET['dir']);
 if (empty($internalDir)) {
     header("Location: /?dir=/");
 }
+
+ini_set('upload_max_filesize', '100000M');
+ini_set('post_max_size', '150000M');
 ?>
 <!DOCTYPE html>
 <html lang="en">
