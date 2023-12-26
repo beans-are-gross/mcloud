@@ -135,7 +135,6 @@ ini_set('post_max_size', '150000M');
                 mysqli_stmt_close($stmt);
                 echo "
                 <p>$totalFiles files</p>
-                <input type='hidden' name='dir' value='$internalDir'>
                 ";
                 ?>
             </form>
