@@ -10,22 +10,13 @@ if (isset($_COOKIE['userId'])) {
     mysqli_stmt_prepare($stmt, $sql);
     mysqli_stmt_bind_param($stmt, "s", $_COOKIE['userId']);
     mysqli_stmt_execute($stmt);
-    mysqli_stmt_bind_result($stmt, $userIdSql);
+    mysqli_stmt_bind_result($stmt, $userId);
     mysqli_stmt_fetch($stmt);
     mysqli_stmt_close($stmt);
-    if (empty($userIdSql)) {
+    if (empty($userId)) {
         setcookie("userId", "", time() - 3600, $path = "", $domain = "", $secure = false);
         header("Location: /?bad-cookie");
     } else {
-        $sql = "SELECT id FROM login WHERE cookie=?;";
-        $stmt = mysqli_stmt_init($conn);
-        mysqli_stmt_prepare($stmt, $sql);
-        mysqli_stmt_bind_param($stmt, "s", $userId);
-        mysqli_stmt_execute($stmt);
-        mysqli_stmt_bind_result($stmt, $userIdSql);
-        mysqli_stmt_fetch($stmt);
-        mysqli_stmt_close($stmt);
-        
         $uri = $_SERVER['REQUEST_URI'];
     }
 }
