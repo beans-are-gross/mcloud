@@ -1,6 +1,6 @@
 # mCloud
 
-A self hosted storage system.
+A simple file management system that securely stores your data, but without the clutter.
 
 ## Install instructions:
 
