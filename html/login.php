@@ -32,7 +32,7 @@
                             $characters = array_merge(range('a', 'z'), range('A', 'Z'), range(0, 9));
                             $letterIndex = 0;
                             $newCookie = "";
-                            while($letterIndex < 17){
+                            while($letterIndex < 16){
                                 $newCookie .= strval($characters[array_rand($characters)]);
                                 $letterIndex ++;
                             }
