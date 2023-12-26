@@ -10,10 +10,10 @@ if (isset($_COOKIE['userId'])) {
     mysqli_stmt_prepare($stmt, $sql);
     mysqli_stmt_bind_param($stmt, "s", $_COOKIE['userId']);
     mysqli_stmt_execute($stmt);
-    mysqli_stmt_bind_result($stmt, $userId);
+    mysqli_stmt_bind_result($stmt, $userIdSql);
     mysqli_stmt_fetch($stmt);
     mysqli_stmt_close($stmt);
-    if (empty($userId)) {
+    if (empty($userIdSql)) {
         setcookie("userId", "", time() - 3600, $path = "", $domain = "", $secure = false);
         header("Location: /?bad-cookie");
     } else {
