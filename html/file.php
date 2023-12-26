@@ -1,13 +1,18 @@
 <?php
 require "./conn.php";
+
 $sql = "SELECT id FROM login WHERE cookie=?;";
 $stmt = mysqli_stmt_init($conn);
 mysqli_stmt_prepare($stmt, $sql);
 mysqli_stmt_bind_param($stmt, "s", $_COOKIE['userId']);
 mysqli_stmt_execute($stmt);
 mysqli_stmt_bind_result($stmt, $userId);
-mysqli_stmt_fetch($stmt);
+if(!mysqli_stmt_fetch($stmt)){
+    http_response_code(403);
+    die("Error: Cookie unauthorized");
+}
 mysqli_stmt_close($stmt);
+
 $sql = "SELECT name, externalDir, type FROM files WHERE userId=? AND id=?;";
 $stmt = mysqli_stmt_init($conn);
 mysqli_stmt_prepare($stmt, $sql);
@@ -18,13 +23,14 @@ mysqli_stmt_fetch($stmt);
 mysqli_stmt_close($stmt);
 
 if(empty($externalDir)){
-    echo "Error: File not found";
     http_response_code(404);
+    die("Error: File not found");
 } else {
     header("Content-type: " . $type);
     $fileExt = end(explode(".", $externalDir));
     header("Content-Disposition: inline;filename=$name.$fileExt");
     if(!readfile($externalDir)){
-        echo "Error: File lost";
+        http_response_code(404);
+        die("Error: File lost");
     }
 }
