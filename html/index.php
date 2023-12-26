@@ -4,7 +4,7 @@ require './header.php';
 if (isset($_POST['login-button']) || isset($_POST['login-submit'])) {
     require './login.php';
     exit;
-} else if (!isset($_COOKIE['pwd'])) {
+} else if (!isset($_COOKIE['userId'])) {
     require './home.php';
     exit;
 }
