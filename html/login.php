@@ -44,7 +44,7 @@
                                 $sql = "UPDATE login SET cookie=? WHERE id=?;";
                                 $stmt = mysqli_stmt_init($conn);
                                 mysqli_stmt_prepare($stmt, $sql);
-                                mysqli_stmt_bind_param($stmt, "s", $newCookie, $idSql);
+                                mysqli_stmt_bind_param($stmt, "ss", $newCookie, $idSql);
                                 mysqli_stmt_execute($stmt);
                                 mysqli_stmt_close($stmt);
                                 header("Location: /");
