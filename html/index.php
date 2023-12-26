@@ -91,7 +91,7 @@ if (empty($internalDir)) {
                         $sql = "INSERT INTO files (name, internalDir, externalDir, type, icon, userId) VALUES(?, ?, ?, ?, ?, ?);";
                         $stmt = mysqli_stmt_init($conn);
                         mysqli_stmt_prepare($stmt, $sql);
-                        mysqli_stmt_bind_param($stmt, "ssssss", $fileName, $internalDir, $fileDestination, $fileType, $icon, $userIdSql);
+                        mysqli_stmt_bind_param($stmt, "ssssss", $fileName, $internalDir, $fileDestination, $fileType, $icon, $userId);
                         mysqli_stmt_execute($stmt);
                         mysqli_stmt_close($stmt);
                     }
