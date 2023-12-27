@@ -10,7 +10,8 @@ sudo apt update && sudo apt install php libapache2-mod-php php-mysql apache2 mys
 
 clear
 
-printf "\033[0;33m! Your /var/www/html folder will be deleted, enter Y to continue.\033[0m\n> "
+printf "\033[0;33m! Your /var/www/html folder will be deleted, enter Y to continue.\033[0m \n"
+printf "> "
 read confirmClearFolder
 
 confirmClearFolder=$(echo "$confirmClearFolder" | tr '[:upper:]' '[:lower:]')
