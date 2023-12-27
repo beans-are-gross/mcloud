@@ -10,7 +10,18 @@ sudo apt update && sudo apt install php libapache2-mod-php php-mysql apache2 mys
 
 clear
 
-printf "\033[0;32m> Moving html folder to /var/www.\033[0m \n"
+printf "\033[0;33m! Your /var/www/html folder will be deleted, enter Y to continue.\033[0m \n" 1>&2
+read confirm
+
+echo "\n";
+
+if [ $confirm != "y" ] || [ $confirm != "Y" ]; then
+   clear
+   printf "\033[0;31m! Script canceled\033[0m \n" 1>&2
+   exit 1
+fi
+
+printf "\033[0;32m> Deleting html folder and moving html folder to /var/www.\033[0m \n"
 rm -r /var/www/html
 mv html /var/www
 
