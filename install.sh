@@ -16,7 +16,7 @@ read confirmClearFolder
 
 confirmClearFolder=$(echo "$confirmClearFolder" | tr '[:upper:]' '[:lower:]')
 
-echo "\n";
+printf "\n";
 
 if [ "$confirmClearFolder" != "y" ]; then
    clear
